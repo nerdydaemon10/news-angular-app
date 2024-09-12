@@ -1,0 +1,39 @@
+@if (placeholder) {
+  <div>
+    <div class="placeholder-glow">
+      <img 
+        class="placeholder w-100 bg-dark ratio ratio-4x3 object-fit-cover rounded mb-3"
+        width="256"
+        height="256"
+      />
+    </div>
+    <h5 class="placeholder-glow">
+      <span class="placeholder rounded col-6"></span>
+    </h5>
+    <p class="placeholder-glow">
+      <span class="placeholder rounded col-7 me-1"></span>
+      <span class="placeholder rounded col-4 me-1"></span>
+      <span class="placeholder rounded col-4 me-1"></span>
+      <span class="placeholder rounded col-6 me-1"></span>
+      <span class="placeholder rounded col-8"></span>
+    </p>
+    <p class="placeholder-glow">
+      <span class="placeholder rounded col-4"></span>
+    </p>
+  </div>
+} @else {
+  <a 
+    class="text-decoration-none text-reset"
+    role="button" 
+    [routerLink]="['', 'article', id]">
+    <img 
+      class="ratio ratio-4x3 object-fit-cover border rounded mb-3" 
+      [src]="urlToImage"
+      width="256"
+      height="256"
+    />
+    <h5>{{ title | truncate:60 }}</h5>
+    <p>{{ description | truncate:128 }}</p>
+    <p class="fs-7">{{ publishedAt | readabletime }}</p>
+  </a>
+}

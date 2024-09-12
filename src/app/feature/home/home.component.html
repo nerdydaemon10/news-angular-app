@@ -1,0 +1,41 @@
+<div [ngClass]="(loading$ | async) ? 'row mb-3' : 'row'">
+  @for (article of articles$ | async; track article.id) {
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+      <app-card 
+        [id]="article.id"
+        [title]="article.title"
+        [description]="article.description"
+        [urlToImage]="article.urlToImage"
+        [publishedAt]="article.publishedAt"
+      />
+    </div>
+  }
+  @if (loading$ | async) {
+    @for (e of [].constructor(limit$ | async); track e) {
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        <app-card [placeholder]="true" />
+      </div>
+    }
+  }
+</div>
+<div class="text-center">
+  @if (loading$ | async) {
+    <button 
+      class="btn btn-light disabled d-block mx-auto w-100 load-more-btn"
+      type="button"
+      disabled="true"
+    >
+      <span class="me-2" role="status">Load More</span>
+      <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
+    </button>
+  } @else {
+    <button 
+      class="btn btn-light d-block mx-auto w-100 load-more-btn"
+      type="button"
+      (click)="loadMore()"
+    >
+      <span class="me-2">Load More</span>
+      <i class="bi bi-chevron-down"></i>
+    </button>
+  }
+</div>
